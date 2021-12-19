@@ -9,13 +9,18 @@ pygame.init()
 
 
 class Window:
-    def __init__(self, width, height, algo_type, algo_name, lst):
+    def __init__(self, width, height, algo_type, algo_name, lst, ascending=True):
         self.width = width                                                  # width
         self.height = height                                                # height
 
         self.screen = pygame.display.set_mode((width, height))              # screen
         pygame.display.set_caption(TITLE)                                   # title
         pygame.display.set_icon(pygame.image.load(PurePath(*ICON_PATH)))    # icon
+
+        self.algo_type = algo_type
+        self.algo_name = algo_name
+        self.ascending = ascending
+
         self.set_list(lst)
 
     def set_list(self, lst):
@@ -29,6 +34,14 @@ class Window:
         self.list_item_width = LIST_WIDTH / self.n
         self.list_item_heigth = (LIST_HEIGHT - LIST_MIN_HEIGHT) / (self.max_value - self.min_value)
         self.draw_list_surface()
+
+    def change_list(self, change, item_one, item_two):
+        if change:
+            self.list[item_one], self.list[item_two] = self.list[item_two], self.list[item_one]
+            self.draw_list_surface(color_two_indexes=[item_one, item_two])
+        else:
+            self.draw_list_surface(color_one_indexes=[item_one])
+
 
     def draw_list_surface(self, color_one_indexes=[], color_two_indexes=[]):
         self.list_surface.fill(BACKGROUND_COLOR)

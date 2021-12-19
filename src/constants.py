@@ -4,7 +4,7 @@ TITLE = "Algorithm Visualization"
 ICON_PATH = "src", "img", "icon.jpg"
 WIDTH = 1000
 HEIGHT = 800
-FPS = 60
+FPS = 120
 
 # colors
 BLACK = (0, 0, 0)
@@ -24,9 +24,9 @@ LIST_COLOR_TWO = GREEN
 ALGORITHM_TYPE = "sorting"
 ALGORITHM_NAME = "bubble_sort"
 
-NUMBER_OF_ITEMS = 100
+NUMBER_OF_ITEMS = 50
 MIN_VALUE = 1
-MAX_VALUE = 100
+MAX_VALUE = 1000
 
 # list surface
 LIST_WIDTH = WIDTH * 0.8
