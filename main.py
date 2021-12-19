@@ -7,7 +7,7 @@ from src.constants import (
     FPS, BACKGROUND_COLOR,
     ALGORITHM_TYPE, ALGORITHM_NAME,
     NUMBER_OF_ITEMS, MIN_VALUE, MAX_VALUE,
-    LIST_POS_X, LIST_POS_Y
+    LIST_POS_X, LIST_POS_Y, SETTING_POS_X, SETTING_POS_Y
 )
 
 
@@ -21,6 +21,7 @@ def draw_window(window):
     window.screen.fill(BACKGROUND_COLOR)
 
     window.screen.blit(window.list_surface, (LIST_POS_X, LIST_POS_Y))
+    window.screen.blit(window.setting, (SETTING_POS_X, SETTING_POS_Y))
 
     pygame.display.update()
 
@@ -53,9 +54,18 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     solving = True
-                elif event.key == pygame.K_d:
-                    window.ascending = False
+                elif event.key == pygame.K_r:
+                    solving = False
+                    window.set_list(generate_random_list(NUMBER_OF_ITEMS, MIN_VALUE, MAX_VALUE))
                     algorithm = set_algorithm(window)
+                elif event.key == pygame.K_a:
+                    if not solving:
+                        window.ascending = True
+                        algorithm = set_algorithm(window)
+                elif event.key == pygame.K_d:
+                    if not solving:
+                        window.ascending = False
+                        algorithm = set_algorithm(window)
                 elif event.key == pygame.K_q:
                     running = False
                     break

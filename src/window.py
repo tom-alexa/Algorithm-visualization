@@ -2,8 +2,10 @@ import pygame
 from pathlib import PurePath
 from .constants import (
     TITLE, ICON_PATH,
+    SETTING_WIDTH, SETTING_HEIGHT,
     LIST_WIDTH, LIST_HEIGHT, LIST_MIN_HEIGHT,
-    BACKGROUND_COLOR, LIST_COLORS, LIST_COLOR_ONE, LIST_COLOR_TWO
+    BACKGROUND_COLOR, LIST_COLORS, LIST_COLOR_ONE, LIST_COLOR_TWO,
+    BLACK
 )
 pygame.init()
 
@@ -21,7 +23,19 @@ class Window:
         self.algo_name = algo_name
         self.ascending = ascending
 
+        self.set_setting()
         self.set_list(lst)
+
+    def set_setting(self):
+        self.setting = pygame.Surface((SETTING_WIDTH, SETTING_HEIGHT))
+        self.draw_setting()
+
+    def draw_setting(self):
+        self.setting.fill(BACKGROUND_COLOR)
+        font = pygame.font.SysFont("comicsans", self.setting.get_height()//5)
+        text = font.render(self.algo_name, 1, BLACK)
+        self.setting.blit(text, (5, 5))
+
 
     def set_list(self, lst):
         self.list = lst
@@ -41,7 +55,6 @@ class Window:
             self.draw_list_surface(color_two_indexes=[item_one, item_two])
         else:
             self.draw_list_surface(color_one_indexes=[item_one])
-
 
     def draw_list_surface(self, color_one_indexes=[], color_two_indexes=[]):
         self.list_surface.fill(BACKGROUND_COLOR)
